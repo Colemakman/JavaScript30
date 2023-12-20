@@ -13,6 +13,7 @@
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
+        <div class="dot"></div>
       </div>
     </div>
 
@@ -63,12 +64,51 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: all 0.05s;
+      /*transition-timing-function:*/ 
     }
+
+    .dot {
+      height: 10px;
+      position: relative;
+      width: 10px;
+      background-color: #000000;
+      border-radius: 50%;
+      display: inline-block;
+      top: 46%;
+      z-index: -10;
+    }
+
+
 
   </style>
 
   <script>
 
+    const secondHand = document.querySelector('.second-hand')
+    const minuteHand = document.querySelector('.min-hand')
+    const hourHand = document.querySelector('.hour-hand')
+
+    function calcRotation(val, max) {
+      return ((360 / max) * val) + 90;
+    }
+  
+    function rotate() {
+
+      date = new Date();
+
+      let secondRotation = calcRotation(date.getSeconds(), 60);
+      let minuteRotation = calcRotation(date.getMinutes(), 60);
+      let hourRotation = calcRotation(date.getHours(), 24);
+
+      secondHand.style.transform = `rotate(${secondRotation}deg)`;
+      minuteHand.style.transform = `rotate(${minuteRotation}deg)`;
+      hourHand.style.transform = `rotate(${hourRotation}deg)`;
+    }
+
+    window.setInterval(rotate, 1000);
 
   </script>
 </body>

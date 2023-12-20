@@ -4,6 +4,10 @@ html {
   background-size: cover;
 }
 
+body {
+  background-image: url('background.jpg');
+}
+
 body,html {
   margin: 0;
   padding: 0;
