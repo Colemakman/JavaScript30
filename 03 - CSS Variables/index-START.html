@@ -43,9 +43,53 @@
     input {
       width: 100px;
     }
+
+    :root {
+      --base: #ffc600;
+      --blur: 10px;
+      --padding: 10px;
+    }
+
+    img {
+      background: var(--base);
+      filter: blur(var(--blur));
+      padding: var(--padding);
+    }
+
+    .h1 {
+      color: var(--base);
+    }
+
   </style>
 
   <script>
+
+    const inputs = document.querySelectorAll(".controls input");
+    console.log(inputs)
+
+    const handler = (e) =>{ 
+
+      let r = document.querySelector(":root");
+
+      switch (e.target.id) {
+        case "spacing":
+          r.style.setProperty('--padding', `${e.target.value}px`);
+          console.log('spacing');
+          break
+        case "blur":
+          r.style.setProperty('--blur', `${e.target.value}px`);
+          console.log('blur')
+        case "base":
+          r.stylue.setProperty('--base', this.value);
+          console.log('base')
+      }
+    }
+
+    inputs.forEach(element => {
+      element.addEventListener("change", handler);
+      element.addEventListener("mousemove", handler);
+    });
+
   </script>
 
 </body>
